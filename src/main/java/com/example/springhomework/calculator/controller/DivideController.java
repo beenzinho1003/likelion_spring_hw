@@ -1,0 +1,28 @@
+package com.example.springhomework.calculator.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class DivideController {
+
+    @GetMapping("/divide")
+    public int divide(
+            @RequestParam int a,
+            @RequestParam int b
+    ) {
+        return a / b;
+    }
+
+    @ExceptionHandler(ArithmeticException.class)
+    public ResponseEntity<String> handleArithmeticException(
+            ArithmeticException exception
+    ) {
+        return ResponseEntity
+                .badRequest()
+                .body("0으로 나눌 수 없습니다.");
+    }
+}
