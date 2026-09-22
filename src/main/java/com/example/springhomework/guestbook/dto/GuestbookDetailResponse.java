@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 @Getter
 @RequiredArgsConstructor
 public class GuestbookDetailResponse{
-
     private final Long id;
     private final String title;
     private final String content;
