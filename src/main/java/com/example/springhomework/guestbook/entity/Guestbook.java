@@ -6,9 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "guestbooks")
 public class Guestbook {
@@ -32,30 +37,28 @@ public class Guestbook {
     @Column(length = 200)
     private String ps;
 
-    protected Guestbook() {
+    public Guestbook(
+            String title,
+            String content,
+            String writer,
+            String ps
+    ) {
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+        this.createdAt = LocalDateTime.now();
+        this.ps = ps;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public String getWriter() {
-        return writer;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public String getPs() {
-        return ps;
+    public void update(
+            String title,
+            String content,
+            String writer,
+            String ps
+    ) {
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+        this.ps = ps;
     }
 }
